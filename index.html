@@ -4,83 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Test</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 20px;
-        }
-        textarea {
-            width: 100%;
-            height: 100px;
-            margin-top: 10px;
-            padding: 10px;
-        }
-        button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-        select {
-            margin-top: 10px;
-            padding: 10px;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Typing Test</h2>
-    
-    <label for="text-select">Choose a text to type:</label>
-    <select id="text-select">
-        <option value="">Select text</option>
-        <option value="Type the quick brown fox jumps over the lazy dog.">The quick brown fox jumps over the lazy dog.</option>
-        <option value="JavaScript is a programming language that conforms to the ECMAScript specification.">JavaScript is a programming language that conforms to the ECMAScript specification.</option>
-        <option value="Learning to code is a valuable skill in today's digital world.">Learning to code is a valuable skill in today's digital world.</option>
-    </select>
-    
-    <p id="text-to-type"></p>
-    <textarea id="user-input" placeholder="Start typing here..." disabled></textarea>
-    <button id="start-button" disabled>Start Test</button>
-    <p id="result"></p>
-    
-    <script>
-        let startTime;
-        let timer;
+    <div class="container">
+        <h1>Typing Test</h1>
+        <p id="textToType">The quick brown fox jumps over the lazy dog.</p>
+        <textarea id="userInput" placeholder="Start typing..."></textarea>
+        <div id="errorDisplay"></div>
+        
+        <div class="controls">
+            <button id="startButton">Start Test</button>
+            <button id="pauseButton" disabled>Pause/Unpause Test</button>
+            <button id="restartButton" disabled>Restart Test</button>
+            <button id="stopButton" disabled>Stop Test</button>
+        </div>
+        
+        <div id="resultDisplay" class="hidden"></div>
+    </div>
 
-        document.getElementById('text-select').onchange = function() {
-            const selectedText = this.value;
-            document.getElementById('text-to-type').innerText = selectedText;
-            document.getElementById('user-input').disabled = false;
-
-            // Enable the Start Test button if a text is selected
-            document.getElementById('start-button').disabled = !selectedText;
-            document.getElementById('user-input').value = '';
-            document.getElementById('result').innerText = '';
-        };
-
-        document.getElementById('start-button').onclick = function() {
-            startTime = new Date();
-            document.getElementById('result').innerText = '';
-            document.getElementById('user-input').focus();
-
-            document.getElementById('user-input').oninput = function() {
-                if (!timer) {
-                    timer = setInterval(calculateWPM, 1000);
-                }
-            };
-        };
-
-        function calculateWPM() {
-            const inputText = document.getElementById('user-input').value;
-            const timeInMinutes = (new Date() - startTime) / 60000;
-            const wordsTyped = inputText.trim().split(/\s+/).length;
-            const wpm = Math.floor(wordsTyped / timeInMinutes);
-            
-            document.getElementById('result').innerText = `Your typing speed is: ${wpm} WPM`;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
