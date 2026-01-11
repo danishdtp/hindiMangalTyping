@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Typing Test</h2>
+    <p id="text-to-type">Type this text as fast as you can.</p>
+    <textarea id="user-input" placeholder="Start typing here..."></textarea>
+    <button id="start-button">Start Test</button>
+    <p id="result"></p>
+    
+    <script>
+        let startTime;
+        let timer;
+
+        document.getElementById('start-button').onclick = function() {
+            document.getElementById('user-input').value = '';
+            startTime = new Date();
+            document.getElementById('result').innerText = '';
+            document.getElementById('user-input').focus();
+
+            document.getElementById('user-input').oninput = function() {
+                if (!timer) {
+                    timer = setInterval(calculateWPM, 1000);
+                }
+            };
+        };
+
+        function calculateWPM() {
+            const inputText = document.getElementById('user-input').value;
+            const timeInMinutes = (new Date() - startTime) / 60000;
+            const wordsTyped = inputText.trim().split(/\s+/).length;
+            const wpm = Math.floor(wordsTyped / timeInMinutes);
+            
+            document.getElementById('result').innerText = `Your typing speed is: ${wpm} WPM`;
+        }
+    </script>
+</body>
+</html>
