@@ -1,5 +1,5 @@
 body {
-    font-family: Noto Sans Devanagari, sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
@@ -24,23 +24,19 @@ textarea {
     margin-top: 10px;
     font-size: 16px;
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.controls {
+#speedDisplay {
     margin-top: 10px;
-    display: flex;
-    justify-content: space-around;
+    font-size: 18px;
+    text-align: center;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+#resultDisplay {
+    margin-top: 20px;
+    text-align: center;
 }
 
 .red {
@@ -53,9 +49,4 @@ button:disabled {
 
 .hidden {
     display: none;
-}
-
-#resultDisplay {
-    margin-top: 20px;
-    text-align: center;
 }
